@@ -1,4 +1,4 @@
-# TM Parser
+# TM Parse
 
 Test project to get data from Transfermarkt.
 
