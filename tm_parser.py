@@ -8,6 +8,9 @@ country = input_file.split('.')[0]
 with open(input_file, 'r') as input_file_source:
     clubs = input_file_source.readlines()
 
+# data storage
+final_data = {}
+
 # process link by link
 for club in clubs:
     # split str on CLUB and URL
@@ -24,11 +27,15 @@ for club in clubs:
     ]
 
     print(f'Fetched {len(player_urls)} players.')
+    final_data[club_name] = player_urls
 
-    with open(f'FIFA_{country}_2023.txt', 'a+') as output_file:
-        output_file.write(club_name + '\n\n')
-        for player_url in player_urls:
-            output_file.write(player_url + '\n')
+print('\nSaving players data...\n')
+
+with open(f'FIFA_{country}_2023.txt', 'w+') as output_file:
+    for club, players in final_data.items():
+        output_file.write(club + '\n\n')
+        for player in players:
+            output_file.write(player + '\n')
         output_file.write('\n\n')
 
-    print('Players data saved.\n')
+print('Players data saved.\n')
